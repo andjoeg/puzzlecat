@@ -18,14 +18,12 @@ static const u32   DGST_POS0         = 0;
 static const u32   DGST_POS1         = 1;
 static const u32   DGST_POS2         = 2;
 static const u32   DGST_POS3         = 3;
-static const u32   DGST_SIZE         = DGST_SIZE_4_4;
+static const u32   DGST_SIZE         = DGST_SIZE_4_5;
 static const u32   HASH_CATEGORY     = HASH_CATEGORY_CRYPTOCURRENCY_WALLET;
-static const char *HASH_NAME         = "Classic Brainwallet, Uncompressed";
+static const char *HASH_NAME         = "Brainwallet, Uncompressed";
 static const u64   KERN_TYPE         = 1337;
 static const u32   OPTI_TYPE         = OPTI_TYPE_NOT_SALTED;
-//static const u64   OPTS_TYPE         = OPTS_TYPE_STOCK_MODULE |
-//                                      OPTS_TYPE_PT_GENERATE_LE;
-static const u64  OPTS_TYPE         = 0;
+static const u64   OPTS_TYPE         = OPTS_TYPE_PT_GENERATE_LE;
 static const u32   SALT_TYPE         = SALT_TYPE_NONE;
 static const char *ST_PASS           = "hashcat";
 //static const char *ST_HASH           = "7f67c2c704bc1eac097fed3bf31963a8f817bfc3";
@@ -113,7 +111,6 @@ u32 module_pw_min (MAYBE_UNUSED const hashconfig_t *hashconfig, MAYBE_UNUSED con
 
 int module_hash_decode (MAYBE_UNUSED const hashconfig_t *hashconfig, MAYBE_UNUSED void *digest_buf, MAYBE_UNUSED salt_t *salt, MAYBE_UNUSED void *esalt_buf, MAYBE_UNUSED void *hook_salt_buf, MAYBE_UNUSED hashinfo_t *hash_info, const char *line_buf, MAYBE_UNUSED const int line_len)
 {
-
   static const u32   PUBKEY_MAXLEN     = 64; // our max is actually always 25 (21 + 4)
   u8 *digest = (u8 *) digest_buf;
 
@@ -168,7 +165,19 @@ int module_hash_decode (MAYBE_UNUSED const hashconfig_t *hashconfig, MAYBE_UNUSE
     digest[i] = pubkey[PUBKEY_MAXLEN - pubkey_len + i + 1];
   }
 
+
+      printf("Digest: %u %u %u %u %u %u %u %u %u %u %u %u %u %u %u %u %u %u %u %u\n", 
+       digest[0], digest[1], digest[2], digest[3], digest[4], 
+       digest[5], digest[6], digest[7], digest[8], digest[9], 
+       digest[10], digest[11], digest[12], digest[13], digest[14], 
+       digest[15], digest[16], digest[17], digest[18], digest[19]);
+
+
+
+
   return (PARSER_OK); 
+
+  
   /*
   //RIPMD implementation below
    u32 *digest = (u32 *) digest_buf;
@@ -193,6 +202,13 @@ int module_hash_decode (MAYBE_UNUSED const hashconfig_t *hashconfig, MAYBE_UNUSE
   digest[2] = hex_to_u32 (hash_pos + 16);
   digest[3] = hex_to_u32 (hash_pos + 24);
   digest[4] = hex_to_u32 (hash_pos + 32);
+
+
+
+
+      printf("Digest-160: %u %u %u %u %u\n", 
+       digest[0], digest[1], digest[2], digest[3], digest[4]);
+
 
   return (PARSER_OK);*/
 
