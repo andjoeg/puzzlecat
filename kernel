@@ -35,10 +35,10 @@
 void print_u32_array_as_chars(u32 *array, int size) {
     for (size_t i = 0; i < size; i++) {
         // Extract each byte from the 32-bit integer
-        char c1 = (array[i] >> 24) & 0xFF;
-        char c2 = (array[i] >> 16) & 0xFF;
-        char c3 = (array[i] >> 8) & 0xFF;
-        char c4 = array[i] & 0xFF;
+        char c4 = (array[i] >> 24) & 0xFF;
+        char c3 = (array[i] >> 16) & 0xFF;
+        char c2 = (array[i] >> 8) & 0xFF;
+        char c1 = array[i] & 0xFF;
 
         // Print each character
         printf("%c%c%c%c", c1, c2, c3, c4);
@@ -53,10 +53,10 @@ void print_u32_array_as_hex(u32 *array, int size) {
     }
 
     for (int i = 0; i < size; i++) {
-        u8 byte1 = (array[i] >> 24) & 0xFF;
-        u8 byte2 = (array[i] >> 16) & 0xFF;
-        u8 byte3 = (array[i] >> 8) & 0xFF;
-        u8 byte4 = array[i] & 0xFF;
+        u8 byte4 = (array[i] >> 24) & 0xFF;
+        u8 byte3 = (array[i] >> 16) & 0xFF;
+        u8 byte2 = (array[i] >> 8) & 0xFF;
+        u8 byte1 = array[i] & 0xFF;
 
         printf("%02X %02X %02X %02X ", byte1, byte2, byte3, byte4);
     }
@@ -130,7 +130,7 @@ KERNEL_FQ void m01337_init (KERN_ATTR_TMPS (brainwallet_tmp_t))
     w[idx] = pws[gid].i[idx];
   }
 
-/*
+
        char c4 = (w[0] >> 24) & 0xFF;
        char c3 = (w[0] >> 16) & 0xFF;
        char c2 = (w[0] >> 8) & 0xFF;
@@ -138,16 +138,50 @@ KERNEL_FQ void m01337_init (KERN_ATTR_TMPS (brainwallet_tmp_t))
        char c8 = (w[1] >> 24) & 0xFF;
        char c7 = (w[1] >> 16) & 0xFF;
        char c6 = (w[1] >> 8) & 0xFF;
-       char c5 = (w[1] & 0xFF);*/
-   // printf("pre-match %c%c%c%c/%c%c%c%c!\n", c1, c2 ,c3,c4,c5,c6,c7,c8);
-      //if (c1 == sample[0] && c2 == sample[1] && c3 == sample[2] && c4 == sample[3] && c5 == sample[4] && c6 == sample[5])
-  /*    if (c1 == sample[0] && c2 == sample[1] && c3 == sample[2] )
-      {
-        printf("matched %c%c%c%c%c%c!\n", c1, c2 ,c3,c4,c5,c6);
-        //print_u32_array_as_chars(p.i, 2);
-      }  */
-     
- 
+       char c5 = (w[1] & 0xFF);
+       char c12 = (w[2] >> 24) & 0xFF;
+       char c11 = (w[2] >> 16) & 0xFF;
+       char c10 = (w[2] >> 8) & 0xFF;
+       char c9 = (w[2] & 0xFF);
+       char c16 = (w[3] >> 24) & 0xFF;
+       char c15 = (w[3] >> 16) & 0xFF;
+       char c14 = (w[3] >> 8) & 0xFF;
+       char c13 = (w[3] & 0xFF);
+       char c20 = (w[4] >> 24) & 0xFF;
+       char c19 = (w[4] >> 16) & 0xFF;
+       char c18 = (w[4] >> 8) & 0xFF;
+       char c17 = (w[4] & 0xFF);
+       char c24 = (w[5] >> 24) & 0xFF;
+       char c23 = (w[5] >> 16) & 0xFF;
+       char c22 = (w[5] >> 8) & 0xFF;
+       char c21 = (w[5] & 0xFF);
+       char c28 = (w[6] >> 24) & 0xFF;
+       char c27 = (w[6] >> 16) & 0xFF;
+       char c26 = (w[6] >> 8) & 0xFF;
+       char c25 = (w[6] & 0xFF);
+       char c32 = (w[7] >> 24) & 0xFF;
+       char c31 = (w[7] >> 16) & 0xFF;
+       char c30 = (w[7] >> 8) & 0xFF;
+       char c29 = (w[7] & 0xFF);
+       char c36 = (w[8] >> 24) & 0xFF;
+       char c35 = (w[8] >> 16) & 0xFF;
+       char c34 = (w[8] >> 8) & 0xFF;
+       char c33 = (w[8] & 0xFF);
+       char c40 = (w[9] >> 24) & 0xFF;
+       char c39 = (w[9] >> 16) & 0xFF;
+       char c38 = (w[9] >> 8) & 0xFF;
+       char c37 = (w[9] & 0xFF);
+
+    if (printout)     {
+      printf("pre-match for pw len %i is %c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c\n", 
+           pw_len, 
+           c1, c2, c3, c4, c5, c6, c7, c8, 
+           c9, c10, c11, c12, c13, c14, c15, c16, 
+           c17, c18, c19, c20, c21, c22, c23, c24, 
+           c25, c26, c27, c28, c29, c30, c31, c32, 
+           c33, c34, c35, c36, c37, c38, c39, c40);
+     }
+
     
     
     //p.pw_len = apply_rules (rules_buf[il_pos].cmds, p.i, p.pw_len);
@@ -311,7 +345,8 @@ KERNEL_FQ void m01337_init (KERN_ATTR_TMPS (brainwallet_tmp_t))
 
   if (printout) {
     printf("ripmd out: ");
-    print_u32_array_as_hex(rctx.h, 5); }
+    print_u32_array_as_hex(rctx.h, 5); 
+  }
 
       
    tmps[gid].digest_buf[0] = r0;
@@ -336,9 +371,11 @@ KERNEL_FQ void m01337_comp (KERN_ATTR_TMPS (brainwallet_tmp_t))
 
   const u64 gid = get_global_id (0);
 
-  if (gid >= GID_CNT) return;
+  if (gid >= GID_CNT){
+    return;
+  }
 
-  const u64 lid = get_local_id (0);
+  //const u64 lid = get_local_id (0);
 
   /**
    * digest
@@ -351,7 +388,40 @@ KERNEL_FQ void m01337_comp (KERN_ATTR_TMPS (brainwallet_tmp_t))
 
   #define il_pos 0
 
-  #ifdef KERNEL_STATIC
-  #include COMPARE_M
-  #endif
+  u32 digest_tp[4];
+
+digest_tp[0] = r0;
+digest_tp[1] = r1;
+digest_tp[2] = r2;
+digest_tp[3] = r3;
+//printf("comp-m pre - %u %u %u %u  is  %i \n", digest_tp[0], digest_tp[1] , digest_tp[2] , digest_tp[3]);
+if (check (digest_tp,
+             bitmaps_buf_s1_a,
+             bitmaps_buf_s1_b,
+             bitmaps_buf_s1_c,
+             bitmaps_buf_s1_d,
+             bitmaps_buf_s2_a,
+             bitmaps_buf_s2_b,
+             bitmaps_buf_s2_c,
+             bitmaps_buf_s2_d,
+             BITMAP_MASK,
+             BITMAP_SHIFT1,
+             BITMAP_SHIFT2))
+{
+  int digest_pos = find_hash (digest_tp, DIGESTS_CNT, &digests_buf[DIGESTS_OFFSET_HOST]);
+  //  printf("comp-m - %u %u %u %u  is  %i \n", digest_tp[0], digest_tp[1] , digest_tp[2] , digest_tp[3],digest_pos);
+
+  if (digest_pos != -1)
+  {
+    const u32 final_hash_pos = DIGESTS_OFFSET_HOST + digest_pos;
+ // printf("hashes_shown pointer %p", &hashes_shown[final_hash_pos]);
+    //u32 b = hc_atomic_nop (&hashes_shown[final_hash_pos]);
+    u32 a = hc_atomic_inc (&hashes_shown[final_hash_pos]);
+  // printf("atomic thing for position %i is %u, final pos is %u \n", digest_pos, a, final_hash_pos);
+
+    
+    mark_hash (plains_buf, d_return_buf, SALT_POS_HOST, DIGESTS_CNT, digest_pos, final_hash_pos, gid, il_pos, 0, 0);
+  }
+}
+
 }
